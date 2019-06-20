@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
+  <link rel="stylesheet" href="style.css">
+  <script src="vue.js"></script>
+  <script src="scripts.js"></script>
+  <script src="https://cdn.jsdelivr.net/sortable/latest/Sortable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <title>Kanban</title>
+</head>
+<body>
+  <div class="container-fluid">
+  <div id="app">
+    <board></board>
+  </div>
+</div>
+<!-- Шаблон для каждой доски -->
+<script id="board-template" type="text/template">
+  <div class="row board">
+    <list v-for="(listItem, index) in lists" 
+            :key="index"
+            :list_name = 'listItem.name'
+            :list_description = 'listItem.description'
+            :header_color="listItem.header_color"
+            item_text = ''
+            :lists = 'lists'
+            :list_items.sync = "items">
+      </list>
+  </div>
+</script>
+<!-- Шаблон для вывода каждой доски переданной в  -->
+<script id="list-template" type="text/template">
+  <div class="col">
+    <div class="heading" :class="this.header_color"> 
+      <h4 class="text-center">{{ list_description }}</h4>
+    </div>
+    <div class="cards cards-list" 
+            :data-type="this.list_name" 
+            v-sortable="this.sortableConfig">
+            
+      <card-edit v-for="item in filteredListItems"
+            class="draggable-card"  
+            :item="item" 
+            :key="item.id" 
+            :data-type="item.list"
+            @item-edited="itemEdited"
+            @item-cancelled="itemCancelled">
+      </card-edit>
+      
+      <card-new  
+            class="fixed-card"
+            :item="defaultItem"
+            v-show="showNewForm"
+            @item-created="itemCreated"
+            @item-cancelled="itemCancelled">
+      </card-new>
+    </div>
+  </div>
+</script>
+<!-- Шаблон создания карточки -->
+<script id="card-new-template" type="text/template">
+  <div class="card">
+    <div class="card-block">
+      <div class="text-center" v-show = "!isFormShowing">   
+        <span class="new-card" @click.prevent = "handleNew">Новая карточка</spans>
+      </div>
+      <div v-show = "isFormShowing" class="form">
+        <div class="form-group">
+          <textarea rows="3" class="form-control" v-model="form.text"></textarea>
+        </div>
+        <div class="form-group text-center">
+          <button class="btn btn-outline-primary btn-sm" @click.prevent="save">Сохранить</button>
+          <button class="btn btn-outline-secondary btn-sm" @click.prevent="cancel">Отмена</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+<!-- Шаблон изменения карточки -->
+<script id="card-edit-template" type="text/template">
+  <div class="card" :id="item.id">
+    <div class="card-block">
+      <div v-show = "!isEditing">   
+        {{item.text}}
+        <span  class="edit" 
+            aria-hidden="true"
+            @click.prevent = "handleEdit">
+            Изменить текс
+        </span>
+      </div>
+      <div v-show = "isEditing" class="form">
+        <div class="form-group">
+          <textarea rows="3" class="form-control" v-model="form.text"></textarea>
+        </div>
+        <div class="form-group text-center">
+          <button class="btn btn-outline-primary btn-sm" @click.prevent="save">Сохранить</button>
+          <button class="btn btn-outline-secondary btn-sm" @click.prevent="cancel">Отмена</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+</body>
+</html>
