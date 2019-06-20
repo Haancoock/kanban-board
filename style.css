@@ -1,0 +1,51 @@
+.red{
+  background-color:#f44842;
+}
+
+.green{
+  background-color:#41f455;
+}
+
+.yellow{
+  background-color: #f4cd41;
+}
+.blue{
+  background-color: #426bf4 ;
+}
+.board {
+  margin-top:15px;
+}
+.heading {
+  padding:10px 10px;
+  color:#fff;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.draggable-card {
+  border-radius:0px;
+}
+.fixed-card {
+  color:#ccc;
+  border:1px dotted #ccc; 
+  border-radius:0px;
+}
+
+.edit{
+  display: block;
+  font-size: 12px;
+}
+
+.card{
+  padding:10px;
+}
+
+.card:hover{
+  cursor: pointer;
+}
+.cards-list {
+  min-height:300px;
+}
+
+.new-card{
+  color:#f4a341;
+}
