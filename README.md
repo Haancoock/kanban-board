@@ -1,4 +1,4 @@
 # kanban-board
 
 
-link - https://haancoock.github.io/
+link - https://haancoock.github.io/kanban
