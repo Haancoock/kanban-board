@@ -209,13 +209,13 @@ Vue.component('board',{
       ],
       
       items: [
-        { id: 1, text: 'Успешно устроиться на работу в "СевСтар"', list: 'verify' },
-        { id: 2, text: 'Стать крутым фронтендером', list: 'todo' },
-        { id: 3, text: 'Наработать больше опыта с Vue.js', list: 'doing' },
-        { id: 4, text: 'Дождаться положительного ответа по тестовому заданию', list: 'doing' },
-        { id: 5, text: 'Заблудиться и опоздать на интервью :)', list: 'done' },
-        { id: 6, text: 'Пройти интервью', list: 'done' },
-        { id: 7, text: 'Отправить тестовое задание', list: 'done' },
+        { id: 1, text: 'Do#1"', list: 'verify' },
+        { id: 2, text: 'Do#2', list: 'todo' },
+        { id: 3, text: 'Do#2', list: 'doing' },
+        { id: 4, text: 'Do#3', list: 'doing' },
+        { id: 5, text: 'Do#4', list: 'done' },
+        { id: 6, text: 'Do#5', list: 'done' },
+        { id: 7, text: 'Do#6', list: 'done' },
       ],
     }
   },  
